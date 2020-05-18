@@ -16,6 +16,7 @@ class A
 class B extends A
 {
     public static $b = 'static var b';
+    public static $test = [1, 2];
 
     /**
      * 覆盖父类方法
@@ -27,10 +28,18 @@ class B extends A
 
     public static function actionB()
     {
-        self::sayHello();
+        self::sayHello(); // 静态属性和方法可以通过 self 关键字调用
         echo parent::CONST_A . PHP_EOL;
-        echo self::$b;
+        echo self::$b; // 静态属性不可以由对象通过 -> 操作符来访问。
+        // $this->test; //$this can not be used in static methods.
+    }
+
+    public function testHi()
+    {
+        var_dump(self::$test);
     }
 }
 
+// 静态方法不需要通过对象即可调用，所以伪变量 $this 在静态方法中不可用
 B::actionB();
+(new B())->testHi();

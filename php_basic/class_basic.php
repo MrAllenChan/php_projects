@@ -43,3 +43,29 @@ A::actionA(); // $this 只能在对象中使用，不能在静态方法中调用
 $b = new B();
 $b->actionB();
 B::actionB(); // 但是如果在另一个对象（类 B）中调用静态方法，则 $this 指向该类（ B ）。
+
+// php7支持通过new class 来实例化一个匿名类，这可以用来替代一些“用后即焚”的完整类定义。
+interface Logger {
+    public function log(string $msg);
+}
+
+class Application {
+    private $logger;
+
+    public function getLogger(): Logger {
+         return $this->logger;
+    }
+
+    public function setLogger(Logger $logger) {
+         $this->logger = $logger;
+    }
+}
+
+$app = new Application;
+$app->setLogger(new class implements Logger {
+    public function log(string $msg) {
+        echo $msg;
+    }
+});
+
+var_dump($app->getLogger());
