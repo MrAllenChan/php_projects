@@ -1,9 +1,24 @@
-<html>
+<?php
+include("includes/config.php");
 
+//session_destroy(); LOGOUT
+
+if(isset($_SESSION['userLoggedIn'])) {
+	$userLoggedIn = $_SESSION['userLoggedIn'];
+}
+else {
+	header("Location: register.php");
+}
+
+?>
+
+<html>
 <head>
-    <title>hey fuck you</title>
+	<title>Welcome to Slotify!</title>
 </head>
 
-<body>Welcome to Slotify!</body>
+<body>
+	Hello!
+</body>
 
 </html>
