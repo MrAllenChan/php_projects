@@ -1,2 +1,2 @@
 # php_projects
-Personal php projects.
+Personal php projects from Udemy.
